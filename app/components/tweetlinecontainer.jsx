@@ -1,7 +1,7 @@
 import React from "react/addons"
 import TweetLine from "./tweetline"
+import {getRandomInt} from "../utils"
 
-console.log(TweetLine);
 export default class TweetLineContainer extends React.Component {
     constructor( props ) {
         super(props);
@@ -12,7 +12,11 @@ export default class TweetLineContainer extends React.Component {
 
     componentWillMount() {
         this.socket = io.connect();
-        this.socket.on('tweet', data => this.newTweet(data));
+        //this.socket.on('tweet', data => this.newTweet(data));
+        setInterval(()=> {
+            let data = {points: getRandomInt(0, 1000)};
+            this.newTweet(data);
+        }, 500);
     }
 
     newTweet( data ) {
