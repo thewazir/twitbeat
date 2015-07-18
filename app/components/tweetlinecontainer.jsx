@@ -1,7 +1,7 @@
 import React from "react/addons"
 import TweetLine from "./tweetline"
+import {getRandomInt} from "../utils"
 
-console.log(TweetLine);
 export default class TweetLineContainer extends React.Component {
     render() {
         return (<div>
