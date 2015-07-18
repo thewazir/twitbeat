@@ -7,7 +7,7 @@
 import React from "react"
 
 //components
-import App from "./app"
+import App from "./components/app"
 
 
 //put React into the global scope for chrome dev tool support
