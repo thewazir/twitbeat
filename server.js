@@ -46,11 +46,15 @@ app.use(mount("/", function *( next ) {
 var server = require('http').Server(app.callback());
 var io = require('socket.io')(server);
 
+var isGoodTweet = function( tweet ) {
+    return !tweet.retweeted;
+}
+
 var weightTheTweet = function(tweet){
     var points = 0;
-    
+
     points = parseInt(tweet.user.followers_count) + parseInt(tweet.retweet_count) + parseInt(tweet.favorite_count);
-    
+
     if(tweet.user.verified){
         points += 5000;
     }
@@ -59,18 +63,19 @@ var weightTheTweet = function(tweet){
 };
 
 io.on('connection', function(socket){
-console.log('user connected');
-   stream.on('tweet', function(tweet) {
-    socket.emit('tweet', { 
-        text: tweet.text,
-        points: weightTheTweet(tweet),
-        name: tweet.user.name,
-        url: "https://twitter.com/" + tweet.user.screen_name + "/status/" + tweet.id_str
+    console.log('user connected');
+    stream.on('tweet', function(tweet) {
+        if (isGoodTweet(tweet)) {
+            socket.emit('tweet', {
+                text: tweet.text,
+                points: weightTheTweet(tweet),
+                name: tweet.user.name,
+                url: "https://twitter.com/" + tweet.user.screen_name + "/status/" + tweet.id_str
+            });
+        }
     });
-});
 });
 
 //start the app
 var port = process.env.PORT || 3000;
 server.listen(port);
-
