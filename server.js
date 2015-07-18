@@ -59,6 +59,12 @@ io.on('connection', function( socket ) {
             name: tweet.user.name
         });
     });
+    stream.on('error', function (event) {
+        console.log(event);
+    });
+    stream.on('disconnect', function (disconnectMessage) {
+        console.log(disconnectMessage);
+    })
 });
 
 //start the app
