@@ -30,7 +30,7 @@ server.use(mount("/", function *( next ) {
     if ( this.path.startsWith("/dist") ) {
         return yield next;
     }
-    this.body = yield render("index");
+    this.body = yield render("index",{ name: "test" });
 }));
 
 //start the server
