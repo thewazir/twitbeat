@@ -40,7 +40,7 @@ app.use(mount("/", function *( next ) {
     if ( this.path.startsWith("/dist") ) {
         return yield next;
     }
-    this.body = yield render("index");
+    this.body = yield render("index",{ name: "test" });
 }));
 
 var server = require('http').Server(app.callback());

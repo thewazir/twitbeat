@@ -65,8 +65,8 @@ gulp.task('pack', ['clean'], function() {
             },
             module: {
                 loaders: [
-                    {test: /\.jsx$/, exclude: [/node_modules/], loader: 'babel-loader'},
-                    {test: /\.js$/, exclude: [/node_modules/], loader: 'babel-loader'}
+                    {test: /\.jsx$/, exclude: [/(node_modules)/], loader: 'babel-loader?stage=0'},
+                    {test: /\.js$/, exclude: [/(node_modules)/], loader: 'babel-loader?stage=0'}
                 ]
             },
             plugins: [
