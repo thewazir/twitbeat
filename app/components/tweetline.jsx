@@ -20,15 +20,15 @@ class TweetLine extends React.Component {
     }
 
     getHeight() {
-        return (document.clientHeight) * .8 || (document.body.clientHeight) * .8;
+        return document.clientHeight || (document.body.clientHeight);
     }
 
     getWidth() {
-        return document.clientWidth || document.body.clientWidth;
+        return (document.clientWidth) * .8 || (document.body.clientWidth) * .8;
     }
 
     render() {
-        return (<div>
+        return (<div className="sparkline-container">
             <Sparklines data={this.props.tweets.map(t => t.points)} width={this.state.width} height={this.state.height}
                         limit={20}>
                 <SparklinesLine style={{ fill: "#2F9B04", color:"#2F9B04", strokeWidth:"5" }}/>

@@ -5,23 +5,23 @@ export default  class TweetList extends React.Component {
         super(props);
     }
 
-    render(){
+    render() {
 
-        let tweets = this.props.tweets.map((t, idx) => {
+        let tweets = this.props.tweets.reverse().map(( t, idx ) => {
             return <li key={idx}>
-            <a className="tweetLink" href={t.url}>{t.name}:{t.text}-{t.points}</a>
+                <a className="tweetLink" href={t.url}><h4>{t.name}</h4><p>{t.text}</p><p>{t.points}</p></a>
             </li>
         });
         console.log(this.props.tweets);
 
-       return (
-        
-        <div className="text-container">
-            <h1>Tweets</h1>
-            <ul className="tweetList">
-                {tweets}
-            </ul>
-        </div>)
+        return (
+
+            <div className="text-container">
+                <div id="logo"></div>
+                <ul className="tweetList">
+                    {tweets}
+                </ul>
+            </div>)
     }
 
 }
