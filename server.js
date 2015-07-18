@@ -9,7 +9,7 @@ var koa      = require('koa'),
     thunkify = require('thunkify-wrap'),
     favicon  = require('koa-favicon'),
     compress = require("koa-compress"),
-    Twit = require("twit");
+    Twit     = require("twit");
 
 var T = new Twit({
   consumer_key: 'XIa0eK7I6GwG39LQiJxhtgXip',
@@ -18,7 +18,7 @@ var T = new Twit({
   access_token_secret: '5nXNkesuj8oDZphQzQtIyboDyreSMHONAPzEEFmibRu0R'
 });
 
-var stream = T.stream('statuses/filter', { track: 'javascript'});
+var stream = T.stream('statuses/filter', {track: 'javascript'});
 
 var STATIC_FILES_MAP = {};
 var SERVE_OPTIONS = {maxAge: 365 * 24 * 60 * 60};
@@ -40,7 +40,7 @@ app.use(mount("/", function *( next ) {
     if ( this.path.startsWith("/dist") ) {
         return yield next;
     }
-    this.body = yield render("index",{ name: "test" });
+    this.body = yield render("index", {name: "test"});
 }));
 
 var server = require('http').Server(app.callback());
@@ -67,7 +67,6 @@ console.log('user connected');
         name: tweet.user.name,
         url: "https://twitter.com/"+tweet.user.screen_name+"/status/"+tweet.id_str
     });
-  });
 });
 
 //start the app
