@@ -9,7 +9,16 @@ var koa      = require('koa'),
     thunkify = require('thunkify-wrap'),
     favicon  = require('koa-favicon'),
     compress = require("koa-compress"),
-    twit = require("twit");
+    Twit = require("twit");
+
+var T = new Twit({
+  consumer_key: 'XmNnZgUutpcO6h42kc2ILdNrs',
+  consumer_secret: 'Sq8AUpG4329EzWlFiJiJoYHkSBXqt3lxLcVOz4bIXJwbfdtGLD',
+  access_token: '273511939-A9NUtcostnLWTdqypUFgQSCpjSSE1dMdpBoTJiyM',
+  access_token_secret: 'apLtdMq2DNx6mvA01HG7Ajm4rNnXkCvBub1GBoXznDh3y'
+});
+
+var stream = T.stream('statuses/filter', { track: 'javascript'});
 
 var STATIC_FILES_MAP = {};
 var SERVE_OPTIONS = {maxAge: 365 * 24 * 60 * 60};
@@ -38,9 +47,10 @@ var server = require('http').Server(app.callback());
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
+    console.log('user connected');
+   stream.on('tweet', function(tweet) {
+    console.log(tweet.text);
+    socket.emit('tweet', { text: tweet.text});
   });
 });
 
