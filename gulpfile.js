@@ -45,7 +45,8 @@ gulp.task('less', ['clean'], function() {
  * A simple task to copy our HTML file and images to the dist directory
  */
 gulp.task('copy', ['clean'], function() {
-    return gulp.src("./app/assets/images/**/*.*").pipe(gulp.dest("dist/assets/images"));
+    var html     = gulp.src("./app/index.html").pipe(gulp.dest("dist/"))
+        , images = gulp.src("./app/images/**/*.*").pipe(gulp.dest("dist/images"));
 });
 
 /**
