@@ -18,6 +18,15 @@ class TweetLine extends React.Component {
         return document.clientWidth || document.body.clientWidth;
     }
 
+    componentWillMount() {
+        this.socket = io.connect()
+        this.socket.on('tweet', data => this.newTweet(data))
+    }
+
+    newTweet(data) {
+        console.log('got tweet data', data)
+    }
+
     render() {
         return (<div>
             <Sparklines data={this.state.data} width={this.getWidth()} height={this.getHeight()} limit={20}>
