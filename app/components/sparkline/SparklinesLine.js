@@ -25,7 +25,7 @@ export default class SparklinesLine extends React.Component {
         const fillPoints = linePoints.concat(closePolyPoints);
 
         const lineStyle = {
-            stroke: color || style.stroke || 'slategray',
+            stroke: color || style.stroke || '#2F9B04',
             strokeWidth: style.strokeWidth || '1',
             strokeLinejoin: style.strokeLinejoin || 'round',
             strokeLinecap: style.strokeLinecap || 'round',
@@ -40,8 +40,10 @@ export default class SparklinesLine extends React.Component {
 
         return (
             <g>
-                <polyline points={fillPoints.join(' ')} style={fillStyle}/>
-                <polyline points={linePoints.join(' ')} style={lineStyle}/>
+                <polyline points={fillPoints.join(' ')} style={fillStyle}>
+                </polyline>
+                <path className="path" d={"M"+linePoints.join(' ')} style={lineStyle}>
+                </path>
             </g>
         )
     }
