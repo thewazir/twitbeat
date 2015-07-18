@@ -12,10 +12,10 @@ var koa      = require('koa'),
     Twit     = require("twit");
 
 var T = new Twit({
-    consumer_key: 'XmNnZgUutpcO6h42kc2ILdNrs',
-    consumer_secret: 'Sq8AUpG4329EzWlFiJiJoYHkSBXqt3lxLcVOz4bIXJwbfdtGLD',
-    access_token: '273511939-A9NUtcostnLWTdqypUFgQSCpjSSE1dMdpBoTJiyM',
-    access_token_secret: 'apLtdMq2DNx6mvA01HG7Ajm4rNnXkCvBub1GBoXznDh3y'
+  consumer_key: 'XIa0eK7I6GwG39LQiJxhtgXip',
+  consumer_secret: 'AvymuinH9aQtkqewS05CTipo9Iw6tTUjUffVTsjSjI98V1fiaf',
+  access_token: '130719275-m5rCvuZKae859YXiKYrwrJqJ9FeDT3gS0KGl5hoG',
+  access_token_secret: '5nXNkesuj8oDZphQzQtIyboDyreSMHONAPzEEFmibRu0R'
 });
 
 var stream = T.stream('statuses/filter', {track: 'javascript'});
@@ -46,36 +46,36 @@ app.use(mount("/", function *( next ) {
 var server = require('http').Server(app.callback());
 var io = require('socket.io')(server);
 
-var weightTheTweet = function( tweet ) {
+var isGoodTweet = function( tweet ) {
+    return !tweet.retweeted;
+}
+
+var weightTheTweet = function(tweet){
     var points = 0;
 
     points = parseInt(tweet.user.followers_count) + parseInt(tweet.retweet_count) + parseInt(tweet.favorite_count);
 
-    if ( tweet.user.verified ) {
+    if(tweet.user.verified){
         points += 5000;
     }
 
     return points;
 };
 
-io.on('connection', function( socket ) {
-    stream.on('tweet', function( tweet ) {
-        socket.emit('tweet', {
-            text: tweet.text,
-            points: weightTheTweet(tweet),
-            name: tweet.user.name,
-            url: "https://twitter.com/" + tweet.user.screen_name + "/status/" + tweet.id_str
-        });
-        stream.on('error', function( event ) {
-            console.log(event);
-        });
-        stream.on('disconnect', function( disconnectMessage ) {
-            console.log(disconnectMessage);
-        })
+io.on('connection', function(socket){
+    console.log('user connected');
+    stream.on('tweet', function(tweet) {
+        if (isGoodTweet(tweet)) {
+            socket.emit('tweet', {
+                text: tweet.text,
+                points: weightTheTweet(tweet),
+                name: tweet.user.name,
+                url: "https://twitter.com/" + tweet.user.screen_name + "/status/" + tweet.id_str
+            });
+        }
     });
 });
 
 //start the app
 var port = process.env.PORT || 3000;
 server.listen(port);
-
