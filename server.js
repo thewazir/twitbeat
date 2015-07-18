@@ -1,6 +1,6 @@
 require('node-jsx').install({extension: '.jsx'});
 require("babel/register");
-var koa      = require('koa'),
+const koa      = require('koa'),
     Router   = require('koa-router'),
     React    = require('react'),
     serve    = require('koa-static'),
@@ -10,24 +10,33 @@ var koa      = require('koa'),
     favicon  = require('koa-favicon'),
     compress = require("koa-compress");
 
-var STATIC_FILES_MAP = {};
-var SERVE_OPTIONS = {maxAge: 365 * 24 * 60 * 60};
+const STATIC_FILES_MAP = {};
+const SERVE_OPTIONS = {maxAge: 365 * 24 * 60 * 60};
 
 //create our app
-var server = koa();
+const app = koa();
 
-server.use(favicon(__dirname + '/images/favicon.ico'));
+app.use(favicon(__dirname + '/images/favicon.ico'));
 
 //mount our static middleware
-server.use(mount('/dist', serve(__dirname + '/dist', {defer: true})));
+app.use(mount('/dist', serve(__dirname + '/dist', {defer: true})));
 
 //render our index.html
-var views = require("co-views");
-var render = views("dist", {map: {html: 'swig'}});
-server.use(mount("/", function *( next ) {
+const views = require("co-views");
+const render = views("dist", {map: {html: 'swig'}});
+app.use(mount("/", function *( next ) {
     this.body = yield render("index");
 }));
 
+const server = require('http').Server(app.callback());
+const io = require('socket.io')(server);
+
+
+//socket.io
+io.on('connection', function(){
+    console.log('hi');
+});
+
 //start the server
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 server.listen(port);
