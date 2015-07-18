@@ -20,10 +20,11 @@ class TweetLine extends React.Component {
         return (<div>
             <Sparklines data={this.props.tweets.map(t => t.points)} width={this.getWidth()} height={this.getHeight()}
                         limit={20}>
-                <SparklinesLine style={{ fill: "#0A2300", stroke:"#2F9B04", color:"#0A2300",strokeWidth:"5" }}/>
+                <SparklinesLine style={{ fill: "#2F9B04", color:"#2F9B04", strokeWidth:"5" }}/>
                 <SparklinesSpots />
-                <SparklinesReferenceLine style={{ stroke:"#4099ff", color: '#4099ff', strokeOpacity: .75, strokeDasharray: '2, 2' }}
-                                         type="mean"/>
+                <SparklinesReferenceLine
+                    style={{ stroke:"#4099ff", color: '#4099ff', strokeOpacity: .75, strokeDasharray: '2, 2' }}
+                    type="mean"/>
             </Sparklines>
         </div>);
     }

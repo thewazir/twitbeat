@@ -8,7 +8,7 @@ export default class TweetLineContainer extends React.Component {
         super(props);
         this.state = {
             tweets: []
-        }
+        };
         this.sound = new Howl({
             urls: ['/dist/sounds/ECGBeepSound.mp3']
         });
@@ -16,11 +16,11 @@ export default class TweetLineContainer extends React.Component {
 
     componentWillMount() {
         this.socket = io.connect();
-        this.socket.on('tweet', data => this.newTweet(data));
-        /*setInterval(()=> {
+        // this.socket.on('tweet', data => this.newTweet(data));
+        setInterval(()=> {
             let data = {points: getRandomInt(0, 1000)};
             this.newTweet(data);
-        }, 500);*/
+        }, 500);
     }
 
     newTweet( data ) {
