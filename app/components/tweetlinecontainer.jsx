@@ -1,4 +1,5 @@
 import React from "react/addons"
+import {Howl} from "howler"
 import TweetLine from "./tweetline"
 import {getRandomInt} from "../utils"
 
@@ -8,6 +9,9 @@ export default class TweetLineContainer extends React.Component {
         this.state = {
             tweets: []
         }
+        this.sound = new Howl({
+            urls: ['/dist/sounds/ECGBeepSound.mp3']
+        });
     }
 
     componentWillMount() {
@@ -21,6 +25,7 @@ export default class TweetLineContainer extends React.Component {
 
     newTweet( data ) {
         let tweets = this.state.tweets;
+        this.sound.play();
         tweets.push(data);
         this.setState({tweets});
     }
