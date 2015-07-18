@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node --harmony --use-strict server.js",
     "test": "gulp test",
-    "postinstall": "gulp build --type production"
+    "postinstall": ""
   },
   "repository": {
     "type": "git",
