@@ -20,7 +20,7 @@ class TweetLine extends React.Component {
     }
 
     getHeight() {
-        return document.clientHeight || document.body.clientHeight;
+        return (document.clientHeight) * .8 || (document.body.clientHeight) * .8;
     }
 
     getWidth() {
