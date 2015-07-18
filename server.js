@@ -47,18 +47,25 @@ var server = require('http').Server(app.callback());
 var io = require('socket.io')(server);
 
 var weightTheTweet = function(tweet){
-    var points = parseInt(tweet.user.followers_count) + parseInt(tweet.retweet_count) + parseInt(tweet.favorite_count);
+    var points = 0;
+    
+    points = parseInt(tweet.user.followers_count) + parseInt(tweet.retweet_count) + parseInt(tweet.favorite_count);
+    
+    if(tweet.user.verified){
+        points += 5000;
+    }
+
     return points;
 };
 
 io.on('connection', function(socket){
 console.log('user connected');
    stream.on('tweet', function(tweet) {
-    console.log(tweet.user.name + "::" + tweet.text);
     socket.emit('tweet', { 
         text: tweet.text,
         points: weightTheTweet(tweet),
-        name: tweet.user.name
+        name: tweet.user.name,
+        url: "https://twitter.com/"+tweet.user.screen_name+"/status/"+tweet.id_str
     });
   });
 });
