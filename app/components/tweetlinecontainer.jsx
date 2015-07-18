@@ -2,10 +2,11 @@ import React from "react/addons"
 import TweetLine from "./tweetline"
 
 export default class TweetLineContainer extends React.Component {
-    contructor() {
+    constructor( props ) {
+        super(props);
         this.state = {
             tweets: []
-        };
+        }
     }
 
     render() {
