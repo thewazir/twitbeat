@@ -4,3 +4,4 @@ export default class TweetLine extends React.Component {
         return (<div></div>);
     }
 }
+TweetLine.propTypes = {tweets: React.PropTypes.array};
