@@ -65,10 +65,12 @@ console.log('user connected');
         text: tweet.text,
         points: weightTheTweet(tweet),
         name: tweet.user.name,
-        url: "https://twitter.com/"+tweet.user.screen_name+"/status/"+tweet.id_str
+        url: "https://twitter.com/" + tweet.user.screen_name + "/status/" + tweet.id_str
     });
+});
 });
 
 //start the app
 var port = process.env.PORT || 3000;
 server.listen(port);
+
