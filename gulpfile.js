@@ -46,6 +46,7 @@ gulp.task('less', ['clean'], function() {
  */
 gulp.task('copy', ['clean'], function() {
     var html     = gulp.src("./app/index.html").pipe(gulp.dest("dist/"))
+        , sounds = gulp.src("./app/assets/sounds/**/*").pipe(gulp.dest("dist/sounds"))
         , images = gulp.src("./app/images/**/*.*").pipe(gulp.dest("dist/images"));
 });
 
