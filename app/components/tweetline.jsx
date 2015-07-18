@@ -5,6 +5,18 @@ import {getRandomInt} from "../utils"
 class TweetLine extends React.Component {
     constructor( props ) {
         super(props);
+        this.state = {
+            height: this.getHeight(),
+            width: this.getWidth()
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.onResize.bind(this));
+    }
+
+    onResize() {
+        this.setState({width: this.getWidth(), height: this.getHeight()});
     }
 
     getHeight() {
@@ -18,7 +30,7 @@ class TweetLine extends React.Component {
 
     render() {
         return (<div>
-            <Sparklines data={this.props.tweets.map(t => t.points)} width={this.getWidth()} height={this.getHeight()}
+            <Sparklines data={this.props.tweets.map(t => t.points)} width={this.state.width} height={this.state.height}
                         limit={20}>
                 <SparklinesLine style={{ fill: "#2F9B04", color:"#2F9B04", strokeWidth:"5" }}/>
                 <SparklinesReferenceLine

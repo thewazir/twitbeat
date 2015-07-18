@@ -8,7 +8,7 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             tweets: []
-        }
+        };
         this.sound = new Howl({
             urls: ['/dist/sounds/ECGBeepSound.mp3']
         });
