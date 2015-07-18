@@ -21,6 +21,13 @@ server.use(favicon(__dirname + '/images/favicon.ico'));
 //mount our static middleware
 server.use(mount('/dist', serve(__dirname + '/dist', {defer: true})));
 
+//render our index.html
+var views = require("co-views");
+var render = views("dist", {map: {html: 'swig'}});
+server.use(mount("/", function *( next ) {
+    this.body = yield render("index");
+}));
+
 //start the server
 var port = process.env.PORT || 3000;
 server.listen(port);
