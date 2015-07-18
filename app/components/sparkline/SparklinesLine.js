@@ -40,8 +40,10 @@ export default class SparklinesLine extends React.Component {
 
         return (
             <g>
-                <polyline points={fillPoints.join(' ')} style={fillStyle}/>
-                <polyline points={linePoints.join(' ')} style={lineStyle}/>
+                <polyline points={fillPoints.join(' ')} style={fillStyle}>
+                </polyline>
+                <path className="path" d={"M"+linePoints.join(' ')} style={lineStyle}>
+                </path>
             </g>
         )
     }
