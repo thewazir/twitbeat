@@ -5,8 +5,6 @@
  * The client JS file that brings in React and bootstraps the app into the page from the server state.
  */
 import React from "react"
-import { Router, Route, Link, Redirect } from 'react-router'
-import { history } from 'react-router/lib/BrowserHistory'
 
 //components
 import App from "./app"
