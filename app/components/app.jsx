@@ -1,6 +1,6 @@
 import React from "react/addons"
 export default class App extends React.Component {
     render() {
-        return (<div></div>);
+        return (<div>Hello</div>);
     }
 }
