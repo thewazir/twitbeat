@@ -35,6 +35,9 @@
 <script type="application/javascript" src="dist/client.js"></script>
 <script>
   var socket = io();
+  socket.on("tweet", function(data){
+    console.log(data);
+  })
 </script>
 </body>
 </html>
