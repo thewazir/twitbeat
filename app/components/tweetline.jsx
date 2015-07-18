@@ -1,5 +1,6 @@
 import React from "react/addons"
-import {Sparklines,SparklinesLine,SparklinesSpots} from "./sparkline/Sparklines"
+import {Sparklines,SparklinesLine,SparklinesSpots,SparklinesReferenceLine} from "./sparkline/Sparklines"
+import {getRandomInt} from "../utils"
 
 class TweetLine extends React.Component {
     constructor( props ) {
@@ -9,8 +10,17 @@ class TweetLine extends React.Component {
         }
     }
 
+    componentDidMount() {
+        setInterval(()=> {
+            let data = this.state.data;
+            data.push(getRandomInt(0, 500));
+            this.setState({data});
+        }, 1000);
+
+    }
+
     getHeight() {
- 
+
         return document.clientHeight || document.body.clientHeight;
     }
 
@@ -21,8 +31,9 @@ class TweetLine extends React.Component {
     render() {
         return (<div>
             <Sparklines data={this.state.data} width={this.getWidth()} height={this.getHeight()} limit={20}>
-                <SparklinesLine color="#1c8cdc"/>
+                <SparklinesLine style={{ fill: "none" }}/>
                 <SparklinesSpots />
+                <SparklinesReferenceLine type="mean"/>
             </Sparklines>
         </div>);
     }
