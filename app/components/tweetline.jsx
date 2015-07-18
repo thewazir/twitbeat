@@ -13,7 +13,7 @@ class TweetLine extends React.Component {
     componentDidMount() {
         setInterval(()=> {
             let data = this.state.data;
-            data.push(getRandomInt(0, 500));
+            data.push(getRandomInt(0, 100));
             this.setState({data});
         }, 1000);
 
@@ -31,7 +31,7 @@ class TweetLine extends React.Component {
     render() {
         return (<div>
             <Sparklines data={this.state.data} width={this.getWidth()} height={this.getHeight()} limit={20}>
-                <SparklinesLine style={{ fill: "none" }}/>
+                <SparklinesLine style={{ fill: "#0A2300" }}/>
                 <SparklinesSpots />
                 <SparklinesReferenceLine type="mean"/>
             </Sparklines>
