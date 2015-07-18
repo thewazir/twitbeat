@@ -27,7 +27,6 @@ export default class App extends React.Component {
 
     newTweet( data ) {
         let tweets = this.state.tweets;
-        console.log(tweets);
         this.sound.play();
         tweets.push(data);
         this.setState({tweets});
