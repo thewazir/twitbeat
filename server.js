@@ -12,10 +12,10 @@ var koa      = require('koa'),
     Twit     = require("twit");
 
 var T = new Twit({
-  consumer_key: 'XIa0eK7I6GwG39LQiJxhtgXip',
-  consumer_secret: 'AvymuinH9aQtkqewS05CTipo9Iw6tTUjUffVTsjSjI98V1fiaf',
-  access_token: '130719275-m5rCvuZKae859YXiKYrwrJqJ9FeDT3gS0KGl5hoG',
-  access_token_secret: '5nXNkesuj8oDZphQzQtIyboDyreSMHONAPzEEFmibRu0R'
+  consumer_key: process.env.CONSUMER_KEY,
+  consumer_secret: process.env.CONSUMER_SECRET,
+  access_token: process.env.ACCESS_TOKEN,
+  access_token_secret: process.env.ACCESS_TOKEN_SECRET
 });
 
 var stream = T.stream('statuses/filter', {track: 'javascript'});
