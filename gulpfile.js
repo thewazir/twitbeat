@@ -95,7 +95,7 @@ gulp.task('develop', ['build'], function() {
 /**
  * The default task is build
  */
-gulp.task("default", ["develop"]);
+gulp.task("default", ["build"]);
 
 /**
  * Define our build task
